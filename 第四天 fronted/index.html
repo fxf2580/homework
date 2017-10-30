@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>瑞森建筑</title>
+	<link rel="stylesheet" type="text/css" href="css/index.css">
+	<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+</head>
+<body>
+	<div class="wrap">
+		<div class="top">
+			<div class="top_1">
+				<img src="img/logo.png">
+				<div class="nav">
+					<a href="index.html">首页</a>
+					<a href="">走进瑞森</a>
+					<a href="xin.html?id=qq">新闻动态</a>
+					<a href="">项目管理</a>
+					<a href="">创新科技</a>
+					<a href="">企业文化</a>
+					<a href="">加入我们</a>
+				</div>
+			</div>
+		</div>
+		<div class="banner">
+			<div class="banner1"><img src="img/banner.png"></div>
+		</div>
+		<div class="footer">
+			<div class="left">
+				<div class="left1">
+					<img src="img/xin.png">
+					<a href="xin.html"><img src="img/jia.png"></a>
+				</div>
+				<div class="left2"></div>
+			</div>
+			<div class="zho">
+				<div class="zho1">
+					<img src="img/ke.png">
+					<a href="#"><img src="img/jia.png"></a>
+				</div>
+				<div class="zho2">
+					<img src="img/cow.jpg">
+				</div>
+			</div>
+			<div class="right">
+				<div class="right1">
+					<img src="img/lian.png">
+					<a href="#"><img src="img/jia.png"></a>
+				</div>
+				<div class="right2">
+					地址：济南市历下区龙奥北路8号玉兰广场6号楼25层<br>
+					电话：0531-82927877 <br>
+					传真：0531-82928577 <br>
+					E-mail：shandongruisen@126.com<br>
+				</div>
+			</div>
+		</div>
+		<div class="xia">山东瑞森建筑工程有限公司 版权所有(C)2010</div>
+	</div>
+</body>	
+<script type="text/javascript">
+	$(function(){
+		$.ajax({
+			url:'http://localhost:3000/item/list',
+			type:'post',
+			dataType:'json',
+			success:function(e){
+				for(var i in e){
+					$('.left2').append("<div><p>"+e[i].sex+"</p><a>"+e[i].name+"</a></div>")
+				}
+			}
+		})
+	})
+</script>
+</html>
