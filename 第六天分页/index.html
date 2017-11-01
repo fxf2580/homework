@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+	<style type="text/css">
+		.wrap{
+			width: 500px;
+			height: 500px;
+			margin: 0 auto;
+		}
+		.top{
+			width: 400px;
+			height: 70px;
+			border-bottom: solid 1px; 
+			margin: 40px auto;
+		}
+		.top div{
+			width: 400px;
+			height: 30px;
+			border-bottom: solid 1px #999; 
+		}
+		.top div:nth-child(2){
+			border-bottom: none;
+		}
+		.top div span{
+			width: 130px;
+			float: left;
+			text-align: center;
+		}
+		ul>li{
+			width: 30px;
+			height: 30px;
+			border: solid 1px violet;
+			float: left;
+			list-style: none;
+			margin-left: 35px;
+			text-align: center;
+			line-height: 30px;
+			background-color: #999;
+			cursor: pointer;
+		}
+	</style>
+</head>
+<body>
+	<div class="wrap">
+		<div class="top">
+			
+		</div>
+		<ul>
+			
+		</ul>
+	</div>
+</body>
+<script type="text/javascript">
+	
+	$(function(){  
+		
+		$.ajax({ 
+			url:'http://localhost:3000/item/count',
+			type:'post',
+			dataType:'json',
+			success:function(e){
+				var coun=Math.ceil(e[0]['COUNT(*)']/2)
+				var str='';
+				for(var i=0;i<coun;i++){
+					str+='<li>'+(i+1)+'</li>';
+				}
+				$('ul').html(str)
+				$('li').click(function(){
+					var dj = $(this).html();
+					$.ajax({
+						url:'http://localhost:3000/item/fenye',
+						type:'post',
+						data:{b:dj},
+						dataType:'json',
+						success:function(e){
+							var lt="";
+							for(var i in e){
+								lt+='<div><span>'+e[i].name+'</span><span>'+e[i].sex+'</span></div>';
+							}
+							$('.top').html(lt)
+						}
+					})
+				})
+			}
+		})
+	})
+</script>
+</html>
