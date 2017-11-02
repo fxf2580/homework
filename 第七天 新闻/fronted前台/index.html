@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+	<style type="text/css">
+		.bottom div{
+			width: 580px;
+			margin: 50px 0 0 50px;
+		}
+		.bottom div p{
+			float: left;
+			width: 130px;
+			height: 30px;
+			border: solid 1px;
+		}
+		.bottom div a{
+			width: 50px;
+			height: 30px;
+			float: left;
+			font-size: 20px;
+			margin-top: 16px;
+		}
+		.bottom div a:link{
+			color: #999;
+			text-decoration: none;
+		}
+		.bottom div a:visited{
+			color: #999;
+		}
+		.bottom div a:hover{
+			color: #999;
+		}
+	</style>
+</head>
+<body>
+	<button value="0">业内新闻</button>
+	<button value="1">企业新闻</button>
+	<div class="bottom">
+		
+	</div>
+</body>
+<script type="text/javascript">
+	$(function(){
+		$('button').click(function(){
+			var btn = $(this).val();
+			$.ajax({
+				url:'http://localhost:3000/item/list',
+				type:'post',
+				dataType:'json',
+				data:{btn:btn},
+				success:function(e){
+					var str="";
+					for(var i in e){
+						if(btn==e[i].uid){
+							str+='<div><a href="detail.html?id='+e[i].id+'">'+e[i].id+'</a><p>'+e[i].uid+'</p><p>'+e[i].name+'</p><p>'+e[i].title+'</p><p>'+e[i].time+'</p></div>'
+						}
+					}
+					$('.bottom').html(str)
+					
+				}
+			})
+		})
+
+	})
+	
+</script>
+</html>
