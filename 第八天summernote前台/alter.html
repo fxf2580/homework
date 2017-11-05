@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<script src="node_modules/jquery/dist/jquery.js"></script>
+	<link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.css">
+	<link rel="stylesheet"  href="node_modules/bootstrap/dist/css/bootstrap-theme.css">
+	<script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
+	<link href="node_modules/summernote/dist/summernote.css" rel="stylesheet">
+	<script src="node_modules/summernote/dist/summernote.js"></script>
+	<style type="text/css">
+		.wrap{
+			width: 500px;
+			margin: 50px auto;
+		}
+		.wrap button{
+			margin-left: 30px;
+		}
+		.bottom{
+			width: 600px;
+			margin-top: 50px;
+		}
+		.bottom div{
+			width: 450px;
+		}
+		.bottom div a{
+			width: 30px;
+			float: left;
+		}
+		
+		.bottom div p{
+			width: 100px;
+			float: left;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<div class="wrap">
+		<button type="button" class="btn btn-default" value="0">业内新闻</button>
+		<button type="button" class="btn btn-success" value="1">企业新闻</button>
+		<div class="bottom">
+			
+		</div>
+	</div>
+	
+</body>
+<script type="text/javascript">
+	$(function(){
+		$('button').click(function(){
+			var btn=$(this).val();
+			$.ajax({
+				url:'http://localhost:3000/item/list',
+				type:'get',
+				dataType:'json',
+				data:{btn:btn},
+				success:function(e){
+					var str="";
+					for(var i in e){
+						if(btn==e[i].uid){
+							str+='<div><a href="detail.html?id='+e[i].id+'">'+e[i].id+'</a><p>'+e[i].uid+'</p><p>'+e[i].name+'</p><p>'+e[i].title+'</p><p>'+e[i].time+'</p></div>'
+						}
+					}
+					$('.bottom').html(str)
+					
+				}
+			})
+		})
+
+	})
+</script>
+</html>
